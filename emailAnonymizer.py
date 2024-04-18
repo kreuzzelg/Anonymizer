@@ -1,10 +1,10 @@
 """
-Project Name: Anonymizer/emailPstAnonymizer
+Project Name: Anonymizer/emailAnonymizer
 Description: Import emails from PST file and anonymize them into text file
 Author: FAM, kreuzzelg
 Date: 18. April 2024
 
-Copyright (c) Year Your Name
+Copyright (c) 2024 FAM, kreuzzelg
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
