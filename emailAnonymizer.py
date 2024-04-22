@@ -33,19 +33,22 @@ from email import generator
 from pathlib import Path
 import re
 import spacy
+import configparser
  
- 
-# Specify the path to your PST file
-pst_file_path = r'D:\Work\AI\EmailHandling\Input\itechsupportNov23.pst'
- 
+# Load init file for specify the path
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# access of the init file
+post_file_path = config['DEFAULT']['InputFile']
+email_out_folder = Path(config['DEFAULT']['OutputFolder'])
+
 # Load the PST file
-archive = PffArchive(pst_file_path)
+archive = PffArchive(post_file_path)
  
 # Create a directory to save extracted emails (if it doesn't exist)
-#eml_out = Path(Path.cwd() / "emls")
-eml_out = Path(r'D:\Work\AI\EmailHandling\Output_6')
-if not eml_out.exists():
-    eml_out.mkdir()
+if not email_out_folder.exists():
+    email_out_folder.mkdir()
  
 # Load the spaCy Language model
 nlp_de = spacy.load("de_core_news_sm")
@@ -95,7 +98,7 @@ for folder in archive.folders():
                 name = name.replace("ö", "oe")
                 name = name.replace("ü", "ue")
             else: name = "no_subject"
-            filename = eml_out / f"{message.identifier}_{name}.eml"
+            filename = email_out_folder / f"{message.identifier}_{name}.eml"
             print('Writing: ', name)
             # Write the email content to the .eml file
             try:
